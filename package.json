@@ -11,6 +11,8 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "type-check": "turbo run type-check",
+    "vercel:dev": "vercel dev",
+    "vercel:deploy": "vercel --prod",
     
     "mobile": "yarn workspace @golf-pro/mobile start",
     "mobile:ios": "yarn workspace @golf-pro/mobile ios", 
@@ -32,7 +34,14 @@
     "turbo": "^1.10.0",
     "prettier": "^3.0.0",
     "eslint": "^8.45.0",
-    "typescript": "^5.1.0"
+    "typescript": "^5.1.0",
+    "@vercel/node": "^3.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5"
   },
   "packageManager": "yarn@3.6.0"
 }
