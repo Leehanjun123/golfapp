@@ -8,7 +8,7 @@ interface Environment {
 }
 
 const ENV: Environment = {
-  API_URL: 'https://golfai.loca.lt',
+  API_URL: 'https://golfapp-gamma.vercel.app',
   ENV: 'production',
   ENABLE_ANALYTICS: false,
   SENTRY_DSN: undefined,
