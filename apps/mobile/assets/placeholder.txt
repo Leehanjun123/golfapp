@@ -1,0 +1,7 @@
+This directory contains app assets:
+- icon.png (1024x1024) - App icon
+- splash.png (1920x1080) - Splash screen
+- adaptive-icon.png (1024x1024) - Android adaptive icon
+- favicon.png (48x48) - Web favicon
+
+Please add appropriate image files for your Golf AI app.

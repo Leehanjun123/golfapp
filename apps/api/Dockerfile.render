@@ -1,0 +1,46 @@
+# Render.com용 Dockerfile - Python + Node.js
+FROM python:3.9-slim
+
+# Node.js 18 설치
+RUN apt-get update && apt-get install -y \
+    curl \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# Python 의존성 설치
+RUN pip install --no-cache-dir \
+    mediapipe==0.10.7 \
+    opencv-python-headless==4.8.1.78 \
+    numpy==1.24.3 \
+    Pillow==10.1.0 \
+    ultralytics==8.0.200
+
+# YOLO 모델 다운로드
+RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
+
+# Node.js 의존성 파일 복사
+COPY package*.json ./
+
+# Node.js 의존성 설치
+RUN npm ci --only=production
+
+# 앱 소스 코드 복사
+COPY . .
+
+# Python 스크립트 실행 권한
+RUN chmod +x enhanced_golf_analyzer.py
+
+# 포트 노출
+EXPOSE 8080
+
+# 헬스체크
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:8080/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
+
+# 서버 시작
+CMD ["node", "server.js"]

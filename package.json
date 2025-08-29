@@ -1,0 +1,42 @@
+{
+  "name": "@golf-pro/monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:smart": "cd apps/mobile && npm run dev:smart",
+    "setup:env": "node scripts/setup-env.js",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "turbo run type-check",
+    
+    "mobile": "yarn workspace @golf-pro/mobile start",
+    "mobile:ios": "yarn workspace @golf-pro/mobile ios", 
+    "mobile:android": "yarn workspace @golf-pro/mobile android",
+    "mobile:dev": "cd apps/mobile && npm run dev",
+    "api": "yarn workspace @golf-pro/api dev",
+    "api:start": "yarn workspace @golf-pro/api start",
+    
+    "build:types": "yarn workspace @golf-pro/types build",
+    "build:shared": "yarn workspace @golf-pro/shared build",
+    "build:ui": "yarn workspace @golf-pro/ui build",
+    "build:packages": "yarn build:types && yarn build:shared && yarn build:ui",
+    
+    "clean": "turbo run clean",
+    "reset": "yarn clean && rm -rf node_modules */node_modules && yarn install",
+    "postinstall": "yarn build:packages"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.0",
+    "prettier": "^3.0.0",
+    "eslint": "^8.45.0",
+    "typescript": "^5.1.0"
+  },
+  "packageManager": "yarn@3.6.0"
+}

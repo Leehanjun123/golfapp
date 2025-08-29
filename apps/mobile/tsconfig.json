@@ -1,0 +1,49 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@screens/*": ["screens/*"],
+      "@config/*": ["config/*"],
+      "@assets/*": ["assets/*"],
+      "@golf-pro/types": ["../../packages/types/src"],
+      "@golf-pro/types/*": ["../../packages/types/src/*"],
+      "@golf-pro/shared": ["../../packages/shared/src"],
+      "@golf-pro/shared/*": ["../../packages/shared/src/*"],
+      "@golf-pro/ui": ["../../packages/ui/src"],
+      "@golf-pro/ui/*": ["../../packages/ui/src/*"]
+    },
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "jsx": "react-native",
+    "lib": ["ES2020"],
+    "types": ["react", "react-native"]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js"
+  ],
+  "references": [
+    {
+      "path": "../../packages/types"
+    },
+    {
+      "path": "../../packages/shared"
+    },
+    {
+      "path": "../../packages/ui"
+    }
+  ]
+}

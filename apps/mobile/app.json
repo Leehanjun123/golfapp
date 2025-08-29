@@ -1,0 +1,91 @@
+{
+  "expo": {
+    "name": "Golf AI Coach",
+    "slug": "golf-ai-coach",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "golfaicoach",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4CAF50"
+    },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 30000
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.golfai.coach",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to record and analyze your golf swing.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to save golf swing videos.",
+        "NSPhotoLibraryAddUsageDescription": "This app needs permission to save analyzed golf swing videos to your photo library.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone to record audio with your golf swing videos.",
+        "NSLocationWhenInUseUsageDescription": "This app uses location to find nearby golf courses and weather information.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSAllowsLocalNetworking": true,
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            },
+            "192.168.45.217": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": true
+            }
+          }
+        }
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.golfai.coach",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4CAF50"
+      },
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO", 
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
+      "usesCleartextTraffic": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-camera",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Golf AI Coach to access your photos.",
+          "savePhotosPermission": "Allow Golf AI Coach to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "your-project-id-here"
+      }
+    },
+    "owner": "golfaicoach",
+    "privacy": "public",
+    "description": "AI-powered golf swing analysis and coaching app with real-time feedback and personalized training programs."
+  }
+}
