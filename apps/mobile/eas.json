@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 5.0.0"
+    "version": ">= 5.0.0",
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
@@ -19,7 +20,8 @@
         "resourceClass": "m-medium"
       },
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
       }
     },
     "production": {
@@ -28,24 +30,15 @@
         "buildConfiguration": "Release"
       },
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.golfaicoach.com"
+        "EXPO_PUBLIC_API_URL": "https://icy-cycles-wash.loca.lt"
       }
     }
   },
   "submit": {
-    "production": {
-      "ios": {
-        "appleId": "REPLACE_WITH_ACTUAL_APPLE_ID",
-        "ascAppId": "REPLACE_WITH_ACTUAL_ASC_APP_ID",
-        "appleTeamId": "REPLACE_WITH_ACTUAL_APPLE_TEAM_ID"
-      },
-      "android": {
-        "serviceAccountKeyPath": "REPLACE_WITH_ACTUAL_SERVICE_ACCOUNT_KEY_PATH",
-        "track": "production"
-      }
-    }
+    "production": {}
   }
 }

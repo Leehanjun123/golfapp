@@ -1,7 +1,6 @@
-// Golf AI - Network Utilities for Dynamic IP Detection
+// Golf AI - Network Utilities (Simplified without expo-network)
 
 import { Platform } from 'react-native';
-import * as Network from 'expo-network';
 import Constants from 'expo-constants';
 
 /**
@@ -43,26 +42,24 @@ export class NetworkUtils {
         return 'localhost';
       }
 
-      // 네트워크 정보 가져오기
-      const networkState = await Network.getNetworkStateAsync();
-      
-      if (!networkState.isConnected) {
-        console.warn('⚠️ No network connection, using localhost');
-        return 'localhost';
+      // Android Emulator
+      if (Platform.OS === 'android' && __DEV__) {
+        return '10.0.2.2';
       }
 
-      // 실제 네트워크 IP 가져오기 (Expo Go 지원)
-      const ipAddress = await Network.getIpAddressAsync();
-      
-      if (ipAddress && this.isValidIP(ipAddress)) {
-        console.log(`🌐 Detected network IP: ${ipAddress}`);
-        this.cachedIP = ipAddress;
-        this.ipCacheTime = Date.now();
-        return ipAddress;
+      // iOS Simulator or Physical Device
+      if (Platform.OS === 'ios') {
+        // 환경변수나 설정에서 IP 가져오기
+        const envHost = process.env.EXPO_PUBLIC_API_HOST || Constants.expoConfig?.extra?.API_HOST;
+        if (envHost) {
+          return envHost;
+        }
+        // 로컬 개발시 Mac IP 사용
+        return '192.168.45.217'; // 실제 Mac IP로 변경 필요
       }
 
     } catch (error) {
-      console.warn('⚠️ Failed to get network IP:', error);
+      console.warn('⚠️ Failed to determine optimal host:', error);
     }
 
     // 폴백: 환경변수 또는 기본값
@@ -147,36 +144,6 @@ export class NetworkUtils {
   }
 
   /**
-   * 네트워크 환경 진단
-   */
-  static async diagnoseNetwork(): Promise<{
-    isConnected: boolean;
-    type: string;
-    ipAddress: string | null;
-    recommendedHost: string;
-  }> {
-    try {
-      const networkState = await Network.getNetworkStateAsync();
-      const ipAddress = await Network.getIpAddressAsync();
-      const recommendedHost = await this.getOptimalHost();
-
-      return {
-        isConnected: networkState.isConnected || false,
-        type: networkState.type || 'unknown',
-        ipAddress,
-        recommendedHost,
-      };
-    } catch (error) {
-      return {
-        isConnected: false,
-        type: 'error',
-        ipAddress: null,
-        recommendedHost: 'localhost',
-      };
-    }
-  }
-
-  /**
    * 개발 환경에서 사용 가능한 모든 호스트 후보 생성
    */
   static getHostCandidates(): string[] {
@@ -184,31 +151,13 @@ export class NetworkUtils {
       'localhost',
       '127.0.0.1',
       '10.0.2.2', // Android Emulator
-      '10.0.0.2',  // iOS Simulator
+      '192.168.45.217', // Your Mac IP
     ];
 
     // 환경변수에서 추가 후보들
     const envHost = process.env.EXPO_PUBLIC_API_HOST;
     if (envHost && !candidates.includes(envHost)) {
       candidates.unshift(envHost);
-    }
-
-    // 일반적인 로컬 네트워크 IP 범위
-    const commonRanges = [
-      '192.168.',
-      '10.0.',
-      '172.16.',
-    ];
-
-    // 현재 IP가 감지되면 같은 서브넷의 게이트웨이 추가
-    if (this.cachedIP) {
-      const ipParts = this.cachedIP.split('.');
-      if (ipParts.length === 4) {
-        const gateway = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.1`;
-        if (!candidates.includes(gateway)) {
-          candidates.splice(1, 0, gateway);
-        }
-      }
     }
 
     return candidates;
@@ -221,13 +170,4 @@ export class NetworkUtils {
     this.cachedIP = null;
     this.ipCacheTime = 0;
   }
-}
-
-// 개발 환경에서 네트워크 진단 실행
-if (__DEV__) {
-  NetworkUtils.diagnoseNetwork().then(diagnosis => {
-    console.log('🌐 Network Diagnosis:', diagnosis);
-  }).catch(error => {
-    console.error('❌ Network diagnosis failed:', error);
-  });
 }

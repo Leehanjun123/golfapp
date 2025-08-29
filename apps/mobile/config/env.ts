@@ -8,19 +8,10 @@ interface Environment {
 }
 
 const ENV: Environment = {
-  API_URL:
-    Constants.expoConfig?.extra?.EXPO_PUBLIC_API_URL ||
-    process.env.EXPO_PUBLIC_API_URL ||
-    'http://localhost:8080',
-  ENV: (Constants.expoConfig?.extra?.EXPO_PUBLIC_ENV ||
-    process.env.EXPO_PUBLIC_ENV ||
-    'development') as Environment['ENV'],
-  ENABLE_ANALYTICS:
-    Constants.expoConfig?.extra?.EXPO_PUBLIC_ENABLE_ANALYTICS === 'true' ||
-    process.env.EXPO_PUBLIC_ENABLE_ANALYTICS === 'true' ||
-    false,
-  SENTRY_DSN:
-    Constants.expoConfig?.extra?.EXPO_PUBLIC_SENTRY_DSN || process.env.EXPO_PUBLIC_SENTRY_DSN,
+  API_URL: 'https://golfai.loca.lt',
+  ENV: 'production',
+  ENABLE_ANALYTICS: false,
+  SENTRY_DSN: undefined,
 };
 
 export default ENV;
