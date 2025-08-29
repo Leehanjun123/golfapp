@@ -14,11 +14,11 @@ WORKDIR /app
 
 # Python 의존성 설치
 RUN pip install --no-cache-dir \
-    mediapipe==0.10.7 \
-    opencv-python-headless==4.8.1.78 \
-    numpy==1.24.3 \
-    Pillow==10.1.0 \
-    ultralytics==8.0.200
+    mediapipe==0.10.14 \
+    opencv-python-headless \
+    numpy \
+    Pillow \
+    ultralytics
 
 # YOLO 모델 다운로드
 RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
