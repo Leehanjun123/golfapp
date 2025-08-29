@@ -2,8 +2,8 @@
 
 ## 📱 다운로드
 
-**APK 파일**: `apps/mobile/android/app/build/outputs/apk/release/app-release.apk` (110MB)
-> GitHub 파일 크기 제한으로 인해 APK는 로컬 빌드 디렉토리에 위치합니다.
+**APK 파일**: `releases/golf-ai-coach-v1.0.0-optimized.apk` (97MB)
+> ProGuard 최적화 및 리소스 압축으로 13MB 용량 절약
 
 ## 🚀 설치 방법
 

@@ -95,7 +95,11 @@
       "Bash(export ANDROID_HOME=~/Android/Sdk)",
       "Bash(export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin)",
       "Bash(~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager:*)",
-      "Bash(export PATH=$PATH:$ANDROID_HOME/platform-tools)"
+      "Bash(export PATH=$PATH:$ANDROID_HOME/platform-tools)",
+      "Bash(gh auth:*)",
+      "Bash(git config:*)",
+      "Bash(git rm:*)",
+      "Bash(git filter-branch:*)"
     ],
     "deny": [],
     "ask": [],
