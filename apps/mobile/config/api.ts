@@ -115,7 +115,6 @@ export const API_ENDPOINTS = {
   // Golf AI
   proComparison: `${API_BASE_URL}/golf/pro-comparison`,
   aiCoach: `${API_BASE_URL}/golf/ai-coach/chat`,
-  challenges: `${API_BASE_URL}/challenges`,
 
   // User
   profile: `${API_BASE_URL}/users/profile`,
@@ -128,24 +127,16 @@ export const API_ENDPOINTS = {
   liveAnalysis: `${API_BASE_URL}/golf/analyze-live`,
   gestureDetection: `${API_BASE_URL}/gesture/detect-hand`,
 
-  // Personal AI
-  personalAI: `${API_BASE_URL}/personal-ai`,
 
-  // Training Plans
-  trainingPlans: `${API_BASE_URL}/training-plans`,
+  // Friends & Social (consolidated)
+  friends: `${API_BASE_URL}/social?feature=friends`,
+  leaderboard: `${API_BASE_URL}/social?feature=leaderboard`,
+  chat: `${API_BASE_URL}/social?feature=chat`,
 
-  // Friends & Social
-  friends: `${API_BASE_URL}/friends`,
-  leaderboard: `${API_BASE_URL}/leaderboard`,
-
-  // Subscription
-  subscription: `${API_BASE_URL}/subscription`,
-
-  // Goals (for GoalSettingScreen)
-  goals: `${API_BASE_URL}/goals`,
-
-  // Chat (for ChatScreen)
-  chat: `${API_BASE_URL}/chat`,
+  // Features (consolidated)
+  goals: `${API_BASE_URL}/features?feature=goals`,
+  challenges: `${API_BASE_URL}/features?feature=challenges`,
+  personalAI: `${API_BASE_URL}/features?feature=personal-ai`,
 
   // Authentication
   auth: `${API_BASE_URL}/auth`,
