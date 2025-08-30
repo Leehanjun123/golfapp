@@ -24,7 +24,7 @@ export class NetworkUtils {
     const host = await this.getOptimalHost();
     const port = Constants.expoConfig?.extra?.API_PORT || process.env.PORT || '8080';
     
-    return `http://${host}:${port}/api/v1`;
+    return `http://${host}:${port}/api`;
   }
 
   /**
@@ -87,7 +87,7 @@ export class NetworkUtils {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 3000);
 
-      const response = await fetch(`${baseUrl.replace('/api/v1', '')}/health`, {
+      const response = await fetch(`${baseUrl.replace('/api', '')}/health`, {
         method: 'GET',
         signal: controller.signal,
         headers: {

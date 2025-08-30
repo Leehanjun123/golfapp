@@ -85,7 +85,7 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
       {showDetails && (
         <View style={styles.details}>
           <Text style={styles.detailText}>
-            Server: {baseUrl.replace('/api/v1', '').replace('http://', '')}
+            Server: {baseUrl.replace('/api', '').replace('http://', '')}
           </Text>
           {lastChecked && (
             <Text style={styles.detailText}>

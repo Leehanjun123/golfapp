@@ -78,7 +78,7 @@ class ApiClientClass {
       // 다른 호스트 후보들 시도
       const candidates = NetworkUtils.getHostCandidates();
       for (const host of candidates) {
-        const candidateUrl = `http://${host}:8080/api/v1`;
+        const candidateUrl = `http://${host}:8080/api`;
         if (candidateUrl === this.currentBaseUrl) continue;
 
         const success = await this.updateBaseUrl(candidateUrl);

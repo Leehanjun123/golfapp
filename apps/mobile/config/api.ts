@@ -18,7 +18,7 @@ const getSmartBaseUrl = async (): Promise<string> => {
   try {
     // Production 환경
     if (ENV.ENV !== 'development') {
-      cachedApiUrl = `${ENV.API_URL}/api/v1`;
+      cachedApiUrl = `${ENV.API_URL}`;
       urlCacheTime = Date.now();
       return cachedApiUrl;
     }
@@ -41,7 +41,7 @@ const getSmartBaseUrl = async (): Promise<string> => {
     const candidates = NetworkUtils.getHostCandidates();
     const fastestHost = await NetworkUtils.findFastestHost(candidates);
     
-    const fallbackUrl = `http://${fastestHost}:8080/api/v1`;
+    const fallbackUrl = `http://${fastestHost}:8080/api`;
     console.log(`🔄 Using fallback: ${fallbackUrl}`);
     
     cachedApiUrl = fallbackUrl;
@@ -51,7 +51,7 @@ const getSmartBaseUrl = async (): Promise<string> => {
   } catch (error) {
     console.error('❌ Failed to determine API URL:', error);
     // 최종 폴백
-    const defaultUrl = `http://localhost:8080/api/v1`;
+    const defaultUrl = `http://localhost:8080/api`;
     cachedApiUrl = defaultUrl;
     urlCacheTime = Date.now();
     return defaultUrl;
@@ -61,21 +61,21 @@ const getSmartBaseUrl = async (): Promise<string> => {
 // 동기적 접근을 위한 초기 URL (즉시 사용 가능)
 const getInitialBaseUrl = (): string => {
   if (ENV.ENV !== 'development') {
-    return `${ENV.API_URL}/api/v1`;
+    return `${ENV.API_URL}`;
   }
   
   // 개발 환경 기본값
   if (Platform.OS === 'web') {
-    return 'http://localhost:8080/api/v1';
+    return 'http://localhost:8080/api';
   }
   
   // 환경변수 우선 사용
   const envHost = process.env.EXPO_PUBLIC_API_HOST;
   if (envHost) {
-    return `http://${envHost}:8080/api/v1`;
+    return `http://${envHost}:8080/api`;
   }
   
-  return 'http://localhost:8080/api/v1';
+  return 'http://localhost:8080/api';
 };
 
 const API_BASE_URL = getInitialBaseUrl();

@@ -63,7 +63,7 @@ export const useApiConnection = () => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-      const response = await fetch(`${testUrl.replace('/api/v1', '')}/health`, {
+      const response = await fetch(`${testUrl.replace('/api', '')}/health`, {
         method: 'GET',
         signal: controller.signal,
         headers: {
@@ -125,7 +125,7 @@ export const useApiConnection = () => {
       // 다른 호스트 후보들 시도
       const candidates = NetworkUtils.getHostCandidates();
       for (const host of candidates) {
-        const candidateUrl = `http://${host}:8080/api/v1`;
+        const candidateUrl = `http://${host}:8080/api`;
         if (candidateUrl === state.baseUrl || candidateUrl === smartUrl) {
           continue; // 이미 테스트한 URL은 건너뛰기
         }
