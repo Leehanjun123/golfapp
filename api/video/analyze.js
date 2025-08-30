@@ -23,11 +23,42 @@ module.exports = async function handler(req, res) {
     if (req.method === 'POST') {
       const { video_data, analysis_type = 'full', user_id } = req.body || {};
 
-      // 비디오 분석 시뮬레이션
+      // 비디오 분석 시뮬레이션 (VideoAnalysisScreen 호환 형식)
       const analysisResult = {
         success: true,
         analysis_id: `video_${Date.now()}`,
         user_id: user_id || 'anonymous',
+        data: {
+          // VideoAnalysisScreen이 기대하는 형식
+          overall_score: Math.floor(Math.random() * 25) + 75,
+          phase_scores: {
+            address: Math.floor(Math.random() * 20) + 80,
+            backswing: Math.floor(Math.random() * 25) + 75,
+            impact: Math.floor(Math.random() * 25) + 75,
+            follow_through: Math.floor(Math.random() * 20) + 80
+          },
+          improvements: [
+            '백스윙 시 왼팔을 조금 더 곧게 펴보세요',
+            '임팩트 순간 체중을 왼쪽으로 더 이동하세요',
+            '팔로우 스루를 더 완전하게 마무리하세요'
+          ],
+          strengths: [
+            '어드레스 자세가 안정적입니다',
+            '템포가 일정합니다',
+            '균형 유지가 우수합니다'
+          ],
+          coaching: {
+            tempo: '백스윙과 다운스윙의 리듬이 좋습니다',
+            rotation: '회전 동작이 부드럽게 연결됩니다',
+            trajectory: '클럽 궤도가 일관성 있습니다'
+          },
+          trajectory_analysis: {
+            tempo_ratio: (Math.random() * 0.5 + 2.5), // 2.5-3.0 이상적
+            max_shoulder_rotation: Math.floor(Math.random() * 30) + 100,
+            max_x_factor: Math.floor(Math.random() * 20) + 35
+          }
+        },
+        // 추가 메타데이터 (기존 format 유지)
         analysis: {
           video_quality: 'good',
           frame_count: Math.floor(Math.random() * 200) + 150,
